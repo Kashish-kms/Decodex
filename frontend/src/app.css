@@ -1,0 +1,29 @@
+/* App Container */
+.app {
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+}
+
+/* Layout */
+main {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply fade-in to main content */
+main {
+  animation: fadeIn 0.5s ease-in-out;
+}

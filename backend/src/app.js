@@ -5,12 +5,12 @@ import { errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
 
-// Enhanced CORS configuration
+// Enhanced CORS for production
 const corsOptions = {
   origin: [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
-    'http://localhost:5000',
+    process.env.FRONTEND_URL || 'http://localhost:3000',
   ],
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
@@ -18,7 +18,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 
 // Debug middleware
 app.use((req, res, next) => {
@@ -31,7 +31,11 @@ app.use('/api', codeRoutes);
 
 // Health check
 app.get('/health', (req, res) => {
-  res.json({ status: 'OK', message: 'Server is running' });
+  res.json({ 
+    status: 'OK', 
+    message: 'Server is running',
+    environment: process.env.NODE_ENV 
+  });
 });
 
 // 404 handler

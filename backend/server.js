@@ -6,18 +6,19 @@ import fs from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const envPath = path.resolve(__dirname, '.env');
+// Only load .env file in development; Render injects env vars in production
+if (process.env.NODE_ENV !== 'production') {
+  const envPath = path.resolve(__dirname, '.env');
+  console.log(`📁 Loading .env from: ${envPath}`);
+  console.log(`📁 .env exists: ${fs.existsSync(envPath)}`);
 
-console.log(`📁 Loading .env from: ${envPath}`);
-console.log(`📁 .env exists: ${fs.existsSync(envPath)}`);
-
-const envConfig = dotenv.config({ path: envPath });
-
-if (envConfig.error) {
-  console.error('❌ Error loading .env:', envConfig.error.message);
-} else {
-  console.log('✅ .env loaded successfully');
-  console.log('📋 Loaded keys:', Object.keys(envConfig.parsed || {}));
+  const envConfig = dotenv.config({ path: envPath });
+  if (envConfig.error) {
+    console.error('❌ Error loading .env:', envConfig.error.message);
+  } else {
+    console.log('✅ .env loaded successfully');
+    console.log('📋 Loaded keys:', Object.keys(envConfig.parsed || {}));
+  }
 }
 
 const apiKey = process.env.OPENROUTER_API_KEY;
@@ -33,7 +34,7 @@ console.log(`   - Key Preview: ${apiKey ? apiKey.substring(0, 20) + '...' : 'N/A
 
 if (!apiKey) {
   console.error('\n❌ CRITICAL: OPENROUTER_API_KEY is missing!');
-  console.error('Make sure .env file contains: OPENROUTER_API_KEY=sk-or-v1-...');
+  console.error('Make sure the environment variable OPENROUTER_API_KEY is set.');
   process.exit(1);
 }
 

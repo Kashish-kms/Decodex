@@ -2,11 +2,12 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
+import app from './src/app.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Only load .env file in development; Render injects env vars in production
+// Only load .env file in development; Koyeb/Railway injects env vars in production
 if (process.env.NODE_ENV !== 'production') {
   const envPath = path.resolve(__dirname, '.env');
   console.log(`📁 Loading .env from: ${envPath}`);
@@ -37,8 +38,6 @@ if (!apiKey) {
   console.error('Make sure the environment variable OPENROUTER_API_KEY is set.');
   process.exit(1);
 }
-
-import app from './src/app.js';
 
 const PORT = process.env.PORT || 5000;
 

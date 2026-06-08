@@ -5,21 +5,9 @@ import { errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
 
-const corsOptions = {
-  origin: [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'http://localhost:5173',
-    'http://127.0.0.1:5173',
-    'https://decodex-kyoz.vercel.app',
-    process.env.FRONTEND_URL,
-  ].filter(Boolean),
-  credentials: true,
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-};
+// Allow all origins temporarily to fix deployment
+app.use(cors());
 
-app.use(cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
 
 app.use((req, res, next) => {
@@ -43,4 +31,3 @@ app.use((req, res) => {
 
 app.use(errorHandler);
 
-export default app;

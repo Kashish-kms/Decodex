@@ -27,3 +27,7 @@ Thumbs.db
 # Cache
 .npm/
 .cache/
+
+.env
+.env.*
+!.env.example

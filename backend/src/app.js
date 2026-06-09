@@ -5,7 +5,6 @@ import { errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
 
-// Allow all origins temporarily to fix deployment
 app.use(cors());
 
 app.use(express.json({ limit: '10mb' }));
@@ -31,3 +30,4 @@ app.use((req, res) => {
 
 app.use(errorHandler);
 
+export default app;

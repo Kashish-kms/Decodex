@@ -8,7 +8,7 @@
     "build": "echo 'No build needed for backend'"
   },
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   },
   "dependencies": {
     "@google/generative-ai": "^0.11.0",

@@ -3,8 +3,17 @@ import '../styles/components.css';
 function LoadingSpinner() {
   return (
     <div className="loading-spinner">
-      <div className="spinner"></div>
-      <p>Generating your code...</p>
+      <div className="spinner-ring">
+        <div className="spinner-core" />
+      </div>
+      <p>
+        Generating your code
+        <span className="loading-dots">
+          <span />
+          <span />
+          <span />
+        </span>
+      </p>
     </div>
   );
 }

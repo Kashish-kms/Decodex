@@ -1,29 +1,72 @@
-* {
+/* ============================================================
+   DECODEX — Global Design System
+   Deep Space / Galaxy Theme
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ─── Reset ─────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* ─── Design Tokens ──────────────────────────────────────── */
 :root {
-  --primary-color: #6366f1;
-  --secondary-color: #ec4899;
-  --background-color: #0f172a;
-  --surface-color: #1e293b;
-  --text-primary: #f1f5f9;
-  --text-secondary: #cbd5e1;
-  --border-color: #334155;
-  --error-color: #ef4444;
-  --success-color: #10b981;
-  --warning-color: #f59e0b;
+  /* Brand Colors */
+  --accent-purple:    #8b5cf6;
+  --accent-pink:      #ec4899;
+  --accent-cyan:      #06b6d4;
+  --accent-blue:      #3b82f6;
+
+  /* Gradient */
+  --grad-primary: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #06b6d4 100%);
+  --grad-text:    linear-gradient(135deg, #c4b5fd 0%, #f9a8d4 50%, #67e8f9 100%);
+  --grad-btn:     linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
+  --grad-card:    linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(6,182,212,0.05) 100%);
+
+  /* Backgrounds */
+  --bg-deep:      #03010a;
+  --bg-mid:       #0a0518;
+  --surface:      rgba(15, 10, 30, 0.7);
+  --surface-hover: rgba(20, 14, 40, 0.85);
+  --glass:        rgba(255,255,255,0.03);
+  --glass-border: rgba(255,255,255,0.08);
+
+  /* Text */
+  --text-primary:   #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted:     #475569;
+
+  /* Status */
+  --error:   #f43f5e;
+  --success: #10b981;
+
+  /* Borders */
+  --border:      rgba(139,92,246,0.2);
+  --border-glow: rgba(139,92,246,0.5);
+
+  /* Radius */
+  --radius-sm:  0.5rem;
+  --radius-md:  0.875rem;
+  --radius-lg:  1.25rem;
+  --radius-xl:  1.75rem;
+
+  /* Shadows */
+  --shadow-glow-purple: 0 0 40px rgba(139, 92, 246, 0.25);
+  --shadow-glow-pink:   0 0 40px rgba(236, 72, 153, 0.2);
+  --shadow-card:        0 8px 32px rgba(0,0,0,0.5), 0 0 1px rgba(255,255,255,0.05);
+  --shadow-btn:         0 4px 24px rgba(139,92,246,0.5);
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Monaco', 'Courier New', monospace;
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-primary);
-  line-height: 1.6;
-}
-
+/* ─── Base ───────────────────────────────────────────────── */
 html,
 body,
 #root {
@@ -31,47 +74,63 @@ body,
   width: 100%;
 }
 
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
 a {
-  color: var(--primary-color);
+  color: var(--accent-cyan);
   text-decoration: none;
+  transition: opacity 0.2s;
 }
 
 a:hover {
+  opacity: 0.8;
   text-decoration: underline;
 }
 
 button {
   cursor: pointer;
-  font-family: inherit;
-  transition: all 0.3s ease;
+  font-family: var(--font-sans);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  transform: none !important;
 }
 
 input,
 textarea,
 select {
-  font-family: inherit;
+  font-family: var(--font-sans);
   color: var(--text-primary);
-  background-color: var(--surface-color);
-  border: 1px solid var(--border-color);
-  padding: 0.75rem;
-  border-radius: 0.5rem;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+/* ─── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-mid); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent-purple), var(--accent-pink));
+  border-radius: 999px;
 }
 
+/* ─── Selection ──────────────────────────────────────────── */
+::selection {
+  background: rgba(139,92,246,0.35);
+  color: #fff;
+}
+
+/* ─── Layout Container ───────────────────────────────────── */
 .container {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 1.5rem;
 }

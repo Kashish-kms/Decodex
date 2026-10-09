@@ -1,11 +1,12 @@
 function Header() {
   return (
-    <header className="header">
-      <div className="header-content">
-        <h1>🚀 Decodex</h1>
-        <p>Generate code using AI powered by OpenAI</p>
-      </div>
-    </header>
+    <nav className="navbar">
+      <a href="/" className="navbar-logo">
+        <span className="navbar-logo-icon">🚀</span>
+        <span className="navbar-logo-text">Decodex</span>
+        <span className="navbar-badge">AI</span>
+      </a>
+    </nav>
   );
 }
 
